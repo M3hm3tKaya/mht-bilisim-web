@@ -9,8 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        dark: {
+          DEFAULT: '#0A0A0F',
+          100: '#12121A',
+          200: '#1A1A2E',
+          300: '#23233A',
+        },
+        accent: {
+          purple: '#6C5CE7',
+          blue: '#00D2FF',
+        },
+        whatsapp: '#25D366',
+      },
+      fontFamily: {
+        heading: ['var(--font-heading)'],
+        body: ['var(--font-body)'],
       },
     },
   },
