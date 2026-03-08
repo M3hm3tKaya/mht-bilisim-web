@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
+import { useDictionary } from '@/lib/DictionaryProvider';
 
 export default function WhatsAppFab() {
+  const { dict } = useDictionary();
+
   return (
     <motion.a
       href="https://wa.me/905535872263"
@@ -15,7 +18,7 @@ export default function WhatsAppFab() {
       transition={{ delay: 1, type: 'spring', stiffness: 200 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      aria-label="WhatsApp ile iletişime geçin"
+      aria-label={dict.whatsappFab.ariaLabel}
     >
       <MessageCircle size={26} className="text-white" fill="white" />
     </motion.a>

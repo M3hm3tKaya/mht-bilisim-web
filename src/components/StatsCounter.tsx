@@ -3,13 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Clock, Smartphone, HeadphonesIcon, Zap } from 'lucide-react';
+import { useDictionary } from '@/lib/DictionaryProvider';
 
-const stats = [
-  { icon: Clock, value: 48, suffix: ' Saat', label: 'Ortalama Teslim Süresi' },
-  { icon: Smartphone, value: 100, suffix: '%', label: 'Mobil Uyumluluk' },
-  { icon: HeadphonesIcon, value: 7, suffix: '/24', label: 'Destek Hattı' },
-  { icon: Zap, value: 95, suffix: '+', label: 'Performans Skoru' },
-];
+const statIcons = [Clock, Smartphone, HeadphonesIcon, Zap];
+const statValues = [48, 100, 7, 95];
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -42,6 +39,8 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
 }
 
 export default function StatsCounter() {
+  const { dict } = useDictionary();
+
   return (
     <section className="py-24 relative">
       {/* Background accent */}
@@ -56,29 +55,32 @@ export default function StatsCounter() {
           className="text-center mb-16"
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
-            Rakamlarla <span className="gradient-text">MHT Bilişim</span>
+            {dict.stats.title} <span className="gradient-text">{dict.stats.titleHighlight}</span>
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="gradient-border p-6 text-center"
-            >
-              <div className="w-10 h-10 mx-auto mb-4 rounded-lg bg-gradient-to-br from-accent-purple/20 to-accent-blue/20 flex items-center justify-center">
-                <stat.icon size={20} className="text-accent-blue" />
-              </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold gradient-text mb-2">
-                <Counter target={stat.value} suffix={stat.suffix} />
-              </div>
-              <p className="text-gray-400 text-sm">{stat.label}</p>
-            </motion.div>
-          ))}
+          {dict.stats.items.map((stat, index) => {
+            const Icon = statIcons[index];
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="gradient-border p-6 text-center"
+              >
+                <div className="w-10 h-10 mx-auto mb-4 rounded-lg bg-gradient-to-br from-accent-purple/20 to-accent-blue/20 flex items-center justify-center">
+                  <Icon size={20} className="text-accent-blue" />
+                </div>
+                <div className="font-heading text-3xl md:text-4xl font-bold gradient-text mb-2">
+                  <Counter target={statValues[index]} suffix={stat.suffix} />
+                </div>
+                <p className="text-gray-400 text-sm">{stat.label}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -5,18 +5,23 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-
-const navLinks = [
-  { href: '/', label: 'Ana Sayfa' },
-  { href: '/hizmetler', label: 'Hizmetler' },
-  { href: '/hakkimizda', label: 'Hakkımızda' },
-  { href: '/iletisim', label: 'İletişim' },
-];
+import { useDictionary } from '@/lib/DictionaryProvider';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { dict, locale } = useDictionary();
+
+  const prefix = `/${locale}`;
+
+  const navLinks = [
+    { href: prefix, label: dict.nav.home },
+    { href: `${prefix}/hizmetler`, label: dict.nav.services },
+    { href: `${prefix}/hakkimizda`, label: dict.nav.about },
+    { href: `${prefix}/iletisim`, label: dict.nav.contact },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +46,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href={prefix} className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-accent-purple to-accent-blue flex items-center justify-center font-heading font-bold text-white text-sm group-hover:scale-105 transition-transform">
               M
             </div>
@@ -74,21 +79,24 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
-          <a
-            href="https://wa.me/905535872263"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-accent-purple to-accent-blue text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
-          >
-            Teklif Al
-          </a>
+          {/* Desktop CTA + Language Switcher */}
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
+            <a
+              href="https://wa.me/905535872263"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-accent-purple to-accent-blue text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
+            >
+              {dict.nav.getQuote}
+            </a>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
-            aria-label="Menüyü aç/kapat"
+            aria-label={dict.nav.menuToggle}
           >
             {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -119,13 +127,16 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <div className="px-4 py-3">
+                <LanguageSwitcher />
+              </div>
               <a
                 href="https://wa.me/905535872263"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block px-4 py-3 mt-2 bg-gradient-to-r from-accent-purple to-accent-blue text-white text-sm font-semibold rounded-lg text-center"
               >
-                Teklif Al
+                {dict.nav.getQuote}
               </a>
             </div>
           </motion.div>

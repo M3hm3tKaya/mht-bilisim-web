@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
+import { useDictionary } from '@/lib/DictionaryProvider';
 
 const technologies = [
   { name: 'Next.js', color: '#000000', bg: 'bg-white/10' },
@@ -15,16 +16,18 @@ const technologies = [
 ];
 
 export default function TechStack() {
+  const { dict } = useDictionary();
+
   return (
     <section className="py-24 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-blue/5 to-transparent" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
-            Kullandığımız <span className="gradient-text">Teknolojiler</span>
+            {dict.techStack.title} <span className="gradient-text">{dict.techStack.titleHighlight}</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Modern ve güvenilir teknolojilerle projelerinizi hayata geçiriyoruz
+            {dict.techStack.subtitle}
           </p>
         </AnimatedSection>
 

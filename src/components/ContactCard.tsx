@@ -3,17 +3,20 @@
 import { motion } from 'framer-motion';
 import { MessageCircle, MapPin, Clock, Phone } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
+import { useDictionary } from '@/lib/DictionaryProvider';
 
 export default function ContactCard() {
+  const { dict } = useDictionary();
+
   return (
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
-            Bizimle <span className="gradient-text">İletişime Geçin</span>
+            {dict.contactPage.pageTitle} <span className="gradient-text">{dict.contactPage.pageTitleHighlight}</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-xl mx-auto">
-            Projeniz hakkında konuşmak için WhatsApp üzerinden bize ulaşın. İlk danışmanlık ücretsizdir.
+            {dict.contactPage.pageSubtitle}
           </p>
         </AnimatedSection>
 
@@ -25,10 +28,10 @@ export default function ContactCard() {
                 <MessageCircle size={32} className="text-whatsapp" />
               </div>
               <h2 className="font-heading text-2xl font-bold text-white mb-3">
-                WhatsApp ile Yazın
+                {dict.contactPage.whatsappTitle}
               </h2>
               <p className="text-gray-400 mb-8 leading-relaxed">
-                En hızlı iletişim yolumuz WhatsApp. Projeniz hakkında detaylı bilgi almak, fiyat teklifi istemek veya sadece sohbet etmek için yazın.
+                {dict.contactPage.whatsappDesc}
               </p>
               <a
                 href="https://wa.me/905535872263"
@@ -37,7 +40,7 @@ export default function ContactCard() {
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-whatsapp text-white font-semibold rounded-2xl hover:bg-whatsapp/90 transition-all shadow-lg shadow-whatsapp/20"
               >
                 <MessageCircle size={20} />
-                Hemen Yazın
+                {dict.contactPage.writeNow}
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
 
@@ -66,13 +69,13 @@ export default function ContactCard() {
                   </div>
                   <div>
                     <h3 className="font-heading font-semibold text-white mb-1">
-                      Çalışma Saatleri
+                      {dict.contactPage.hoursTitle}
                     </h3>
                     <p className="text-gray-400 text-sm">
-                      Pazartesi – Cumartesi: 09:00 – 20:00
+                      {dict.contactPage.hoursWeekday}
                     </p>
                     <p className="text-gray-500 text-sm">
-                      Pazar: Randevu ile
+                      {dict.contactPage.hoursSunday}
                     </p>
                   </div>
                 </div>
@@ -90,13 +93,13 @@ export default function ContactCard() {
                   </div>
                   <div>
                     <h3 className="font-heading font-semibold text-white mb-1">
-                      Konum
+                      {dict.contactPage.locationTitle}
                     </h3>
                     <p className="text-gray-400 text-sm">
-                      İstanbul, Türkiye
+                      {dict.contactPage.locationCity}
                     </p>
                     <p className="text-gray-500 text-sm">
-                      Uzaktan çalışma ile Türkiye genelinde hizmet
+                      {dict.contactPage.locationDesc}
                     </p>
                   </div>
                 </div>
@@ -106,19 +109,19 @@ export default function ContactCard() {
             <AnimatedSection delay={0.45}>
               <div className="gradient-border p-6">
                 <h3 className="font-heading font-semibold text-white mb-3">
-                  Sıkça Sorulan
+                  {dict.contactPage.faqTitle}
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-gray-300 text-sm font-medium">Fiyatlar ne kadar?</p>
+                    <p className="text-gray-300 text-sm font-medium">{dict.contactPage.faqQ1}</p>
                     <p className="text-gray-500 text-sm mt-1">
-                      Her proje farklıdır. İhtiyaçlarınıza göre özel fiyat teklifi sunuyoruz.
+                      {dict.contactPage.faqA1}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-300 text-sm font-medium">Teslim süresi ne kadar?</p>
+                    <p className="text-gray-300 text-sm font-medium">{dict.contactPage.faqQ2}</p>
                     <p className="text-gray-500 text-sm mt-1">
-                      Basit web siteleri 48 saat içinde, SaaS projeler kapsamına göre planlanır.
+                      {dict.contactPage.faqA2}
                     </p>
                   </div>
                 </div>

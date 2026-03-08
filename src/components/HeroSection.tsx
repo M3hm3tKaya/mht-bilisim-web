@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useDictionary } from '@/lib/DictionaryProvider';
 
 export default function HeroSection() {
+  const { dict, locale } = useDictionary();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated background elements */}
@@ -57,7 +60,7 @@ export default function HeroSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8">
             <div className="w-2 h-2 rounded-full bg-whatsapp animate-pulse" />
-            <span className="text-xs text-gray-300 font-medium">Yazılım & Tasarım Çözümleri</span>
+            <span className="text-xs text-gray-300 font-medium">{dict.hero.badge}</span>
           </div>
         </motion.div>
 
@@ -67,10 +70,10 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
-          İşletmenizi{' '}
-          <span className="gradient-text">dijitale</span>
+          {dict.hero.title1}{' '}
+          <span className="gradient-text">{dict.hero.titleHighlight}</span>
           <br />
-          taşıyoruz.
+          {dict.hero.title2}
         </motion.h1>
 
         <motion.p
@@ -79,8 +82,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          Modern web siteleri, güçlü SaaS ürünleri ve dijital dönüşüm çözümleriyle
-          işletmenizi bir adım öne taşıyoruz.
+          {dict.hero.subtitle}
         </motion.p>
 
         <motion.div
@@ -95,14 +97,14 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-purple to-accent-blue text-white font-semibold rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-accent-purple/20"
           >
-            Ücretsiz Teklif Al
+            {dict.hero.cta}
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <Link
-            href="/hizmetler"
+            href={`/${locale}/hizmetler`}
             className="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white font-semibold rounded-2xl hover:bg-white/5 transition-all"
           >
-            Hizmetlerimiz
+            {dict.hero.servicesLink}
           </Link>
         </motion.div>
       </div>
