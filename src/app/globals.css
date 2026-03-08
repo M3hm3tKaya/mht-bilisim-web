@@ -82,3 +82,31 @@ body {
     linear-gradient(90deg, rgba(108, 92, 231, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
+
+/* Mobile performance: hide heavy blur decorations */
+@media (max-width: 768px) {
+  .hero-orb {
+    display: none !important;
+  }
+  .hero-shape {
+    display: none !important;
+  }
+  .cta-blob {
+    display: none !important;
+  }
+  .grid-bg {
+    display: none !important;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-orb,
+  .hero-shape,
+  .cta-blob {
+    display: none !important;
+  }
+}

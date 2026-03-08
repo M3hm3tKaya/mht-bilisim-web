@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { useDictionary } from '@/lib/DictionaryProvider';
@@ -15,19 +14,11 @@ export default function CTASection() {
           <div className="relative overflow-hidden rounded-3xl">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-accent-purple/20 to-accent-blue/20" />
-            <div className="absolute inset-0 bg-dark-100/80 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-dark-100/80" />
 
-            {/* Decorative elements */}
-            <motion.div
-              className="absolute -top-20 -right-20 w-60 h-60 bg-accent-purple/10 rounded-full blur-[80px]"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent-blue/10 rounded-full blur-[80px]"
-              animate={{ scale: [1.2, 1, 1.2] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            />
+            {/* Decorative elements — desktop only */}
+            <div className="cta-blob absolute -top-20 -right-20 w-60 h-60 bg-accent-purple/10 rounded-full blur-[80px]" />
+            <div className="cta-blob absolute -bottom-20 -left-20 w-60 h-60 bg-accent-blue/10 rounded-full blur-[80px]" />
 
             <div className="relative z-10 px-8 py-16 md:py-20 text-center">
               <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">

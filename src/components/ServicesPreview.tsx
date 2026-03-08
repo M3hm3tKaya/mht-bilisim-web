@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Globe, RefreshCw, Layers } from 'lucide-react';
 import Link from 'next/link';
 import AnimatedSection from './AnimatedSection';
@@ -34,13 +33,9 @@ export default function ServicesPreview() {
           {dict.servicesPreview.items.map((service, index) => {
             const Icon = serviceIcons[index];
             return (
-              <AnimatedSection key={index} delay={index * 0.15}>
+              <AnimatedSection key={index} delay={index * 0.1}>
                 <Link href={`/${locale}/${serviceHrefs[index]}`}>
-                  <motion.div
-                    className="group relative gradient-border p-8 h-full cursor-pointer"
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="group relative gradient-border p-8 h-full cursor-pointer hover:-translate-y-1 transition-transform duration-300">
                     <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${serviceGradients[index]} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     <div className="relative z-10">
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${serviceGradients[index]} flex items-center justify-center mb-6`}>
@@ -57,7 +52,7 @@ export default function ServicesPreview() {
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </Link>
               </AnimatedSection>
             );
