@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, DM_Sans } from 'next/font/google';
 import '../globals.css';
+/* i18n layout — TR/EN */
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFab from '@/components/WhatsAppFab';
