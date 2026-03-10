@@ -92,7 +92,7 @@ export async function generateMetadata({
       },
     },
     verification: {
-      google: 'GOOGLE_SITE_VERIFICATION_CODE',
+      google: 'Bk7T9SURcTqHeIVNPRVWV-Zp9szWWysvk-mR75Tharo',
     },
   };
 }
