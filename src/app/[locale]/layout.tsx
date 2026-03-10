@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, DM_Sans } from 'next/font/google';
 import '../globals.css';
-/* i18n layout — TR/EN */
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFab from '@/components/WhatsAppFab';
+import JsonLd from '@/components/JsonLd';
 import { DictionaryProvider } from '@/lib/DictionaryProvider';
 import { getDictionary } from '@/lib/dictionaries';
 import { locales, type Locale } from '@/lib/i18n';
@@ -72,7 +72,9 @@ export async function generateMetadata({
       title: dict.metadata.home.ogTitle,
       description: dict.metadata.home.ogDescription,
     },
+    metadataBase: new URL('https://mhtbilisim.com'),
     alternates: {
+      canonical: `/${locale}`,
       languages: {
         tr: '/tr',
         en: '/en',
@@ -81,6 +83,16 @@ export async function generateMetadata({
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    verification: {
+      google: 'GOOGLE_SITE_VERIFICATION_CODE',
     },
   };
 }
@@ -99,6 +111,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${heading.variable} ${body.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <JsonLd locale={locale as Locale} />
       </head>
       <body className="font-body antialiased bg-dark text-gray-200 min-h-screen">
         <DictionaryProvider dictionary={dict} locale={locale as Locale}>
